@@ -5,6 +5,7 @@ interface Query {
   colorId?: string;
   sizeId?: string;
   categoryId?: string;
+  storeId?: string;
   isFeatured?: boolean;
 }
 
@@ -12,18 +13,19 @@ export const API = axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
 });
 
-export const getProduct = async (productId: string): Promise<ProductWithVarsAndImages> => {
-  const res = await API.get(`/products/${productId}`);
+export const getProduct = async (storeId: string, productId: string): Promise<ProductWithVarsAndImages> => {
+  const res = await API.get(`/${storeId}/products/${productId}`);
   return res.data;
 };
 
-export const getProducts = async (query: Query): Promise<ProductWithVarsAndImages[]> => {
+export const getProducts = async (storeId: string, query: Query): Promise<ProductWithVarsAndImages[]> => {
   const res = await API({
     method: "GET",
-    url: "/products",
+    url: `/${storeId}/products`,
     params: {
       colorId: query.colorId,
       sizeId: query.sizeId,
+      storeId: query.storeId,
       categoryId: query.categoryId,
       isFeatured: query.isFeatured,
     },
@@ -31,33 +33,36 @@ export const getProducts = async (query: Query): Promise<ProductWithVarsAndImage
   return res.data;
 };
 
-export const getStore = async (): Promise<Store> => {
-  const res = await API.get("/");
+export const getStore = async (storeId: string): Promise<Store> => {
+  const res = await API.get(`/${storeId}`);
   return res.data;
 };
 
-export const getCategory = async (categoryId: string): Promise<Category & { billboard: Billboard }> => {
-  const res = await API.get(`/categories/${categoryId}`);
+export const getCategory = async (
+  storeId: string,
+  categoryId: string
+): Promise<Category & { billboard: Billboard }> => {
+  const res = await API.get(`/${storeId}/categories/${categoryId}`);
   return res.data;
 };
 
-export const getBillboard = async (id: string): Promise<Billboard> => {
-  const res = await API.get(`/billboards/${id}`);
+export const getBillboard = async (storeId: string, id: string): Promise<Billboard> => {
+  const res = await API.get(`/${storeId}/billboards/${id}`);
   return res.data;
 };
-export const getBillboards = async (): Promise<Billboard[]> => {
-  const res = await API.get("/billboards");
+export const getBillboards = async (storeId: string): Promise<Billboard[]> => {
+  const res = await API.get(`/${storeId}/billboards`);
   return res.data;
 };
-export const getColors = async (): Promise<Color[]> => {
-  const res = await API.get("/colors");
+export const getColors = async (storeId: string): Promise<Color[]> => {
+  const res = await API.get(`/${storeId}/colors`);
   return res.data;
 };
-export const getSizes = async (): Promise<Size[]> => {
-  const res = await API.get("/sizes");
+export const getSizes = async (storeId: string): Promise<Size[]> => {
+  const res = await API.get(`/${storeId}/sizes`);
   return res.data;
 };
-export const getCategories = async (): Promise<Category[]> => {
-  const res = await API.get("/categories");
+export const getCategories = async (storeId: string): Promise<Category[]> => {
+  const res = await API.get(`/${storeId}/categories`);
   return res.data;
 };

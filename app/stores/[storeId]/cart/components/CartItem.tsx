@@ -6,15 +6,13 @@ import Currency from "@/components/ui/currency";
 import useCart from "@/hooks/useCart";
 import { CartItem as CartItemType, Color, Image as ImageType, Product, Size } from "@/types";
 
-interface CartItemProps {
-  data: CartItemType;
-}
-
-export const CartItem: React.FC<CartItemProps> = ({ data }) => {
+export const CartItem = ({ data }: { data: CartItemType }) => {
   const cart = useCart();
+
   const onRemove = () => {
     cart.removeItem(data.product.id);
   };
+
   return (
     <li className="flex py-6 border-b">
       <div className="relative h-24 w-24 rounded-md overflow-hidden sm:h-48 sm:w-48">

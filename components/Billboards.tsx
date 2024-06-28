@@ -4,11 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { easeOut, useAnimate } from "framer-motion";
 
-interface BillboardProps {
-  billboards: BillboardType[];
-}
-
-const Billboards: React.FC<BillboardProps> = ({ billboards }) => {
+const Billboards = ({ billboards }: { billboards: BillboardType[] }) => {
   const [slide, setSlide] = useState(billboards.length / 2 - 1);
   const [scope, animate] = useAnimate();
   const containerRef = useRef<HTMLDivElement>(null);
@@ -16,12 +12,13 @@ const Billboards: React.FC<BillboardProps> = ({ billboards }) => {
   const handleLeft = () => {
     setSlide((prev) => (prev > 0 ? prev - 1 : prev));
   };
+
   const handleRight = () => {
     setSlide((prev) => (prev < billboards.length - 1 ? prev + 1 : prev));
   };
 
   useEffect(() => {
-    if (containerRef.current?.clientWidth) {
+    if (containerRef.current?.clientWidth && billboards.length > 1) {
       animate(scope.current, { x: -slide * containerRef.current.clientWidth }, { ease: easeOut, duration: 0.3 });
     }
   }, [slide]);

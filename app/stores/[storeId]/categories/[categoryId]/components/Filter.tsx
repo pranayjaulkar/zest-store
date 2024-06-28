@@ -11,22 +11,27 @@ interface FilterProps {
   valueKey: string;
 }
 
-const Filter: React.FC<FilterProps> = ({ data, name, valueKey }) => {
+const Filter = ({ data, name, valueKey }: FilterProps) => {
   const searchParams = useSearchParams();
   const router = useRouter();
   const selectedValue = searchParams.get(valueKey);
+
   const handleOnClick = (id: string) => {
     const current = qs.parse(searchParams.toString());
+
     const query = {
       ...current,
       [valueKey]: id,
     };
+
     if (current[valueKey] === id) {
       query[valueKey] = null;
     }
+
     const url = qs.stringifyUrl({ url: window.location.href, query }, { skipNull: true });
     router.push(url);
   };
+
   return (
     <div className="mb-8">
       <h3 className="text-lg font-semibold">{name}</h3>

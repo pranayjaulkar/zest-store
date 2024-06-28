@@ -5,9 +5,7 @@ import Modal from "@/components/ui/modal";
 import Gallery from "@/components/gallery/Gallery";
 import Info from "@/components/ui/info";
 
-interface PreviewModalProps {}
-
-const PreviewModal: React.FC<PreviewModalProps> = () => {
+const PreviewModal = () => {
   const previewModal = usePreviewModal();
   const product = usePreviewModal((state) => state.data);
 

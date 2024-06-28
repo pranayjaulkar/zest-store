@@ -5,12 +5,14 @@ import useCart from "@/hooks/useCart";
 import { MouseEventHandler } from "react";
 import { CartItem } from "@/types";
 
-const AddToCart: React.FC<CartItem> = ({ product, size, color }) => {
+const AddToCart = ({ product, size, color }: CartItem) => {
   const cart = useCart();
+
   const onAddToCart: MouseEventHandler<HTMLButtonElement> = (event) => {
     event?.stopPropagation();
     cart.addItem({ product, size, color });
   };
+
   return (
     <div className="mt-10 flex items-center gap-x-3">
       <Button onClick={onAddToCart} className="flex items-center gap-x-2">

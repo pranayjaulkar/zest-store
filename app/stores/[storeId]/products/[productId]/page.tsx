@@ -4,12 +4,10 @@ import Container from "@/components/ui/container";
 import Gallery from "@/components/gallery/Gallery";
 import Info from "@/components/ui/info";
 
-interface ProductPageProps {
-  params: { productId: string };
-}
-const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
-  const product = await getProduct(params.productId);
-  const suggestedProducts = await getProducts({
+export default async function ProductPage({ params }: { params: { productId: string; storeId: string } }) {
+  const product = await getProduct(params.storeId, params.productId);
+
+  const suggestedProducts = await getProducts(params.storeId, {
     categoryId: product?.category?.id,
   });
 
@@ -29,5 +27,4 @@ const ProductPage: React.FC<ProductPageProps> = async ({ params }) => {
       </Container>
     </div>
   );
-};
-export default ProductPage;
+}

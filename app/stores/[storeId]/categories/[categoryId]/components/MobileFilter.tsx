@@ -1,25 +1,29 @@
 "use client";
+import { Color, Size } from "@/types";
+import { useState } from "react";
+
 import { Button } from "@/components/ui/button";
 import IconButton from "@/components/ui/icon-button";
-import { Color, Size } from "@/types";
 import { Dialog } from "@headlessui/react";
 import { Filter as FilterIcon, X } from "lucide-react";
-import { useState } from "react";
-import Filter from "@/app/category/[categoryId]/components/Filter";
+import Filter from "@/app/stores/[storeId]/categories/[categoryId]/components/Filter";
 
 interface MobileFilterProps {
   sizes: Size[];
   colors: Color[];
 }
 
-const MobileFilter: React.FC<MobileFilterProps> = ({ sizes, colors }) => {
+const MobileFilter = ({ sizes, colors }: MobileFilterProps) => {
   const [open, setOpen] = useState(false);
+
   const onOpen = () => {
     setOpen(true);
   };
+
   const onClose = () => {
     setOpen(false);
   };
+
   return (
     <div>
       <Button className="flex items-center gap-x-2 lg:hidden" onClick={onOpen}>

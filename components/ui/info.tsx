@@ -1,7 +1,9 @@
 "use client";
 import { Color, ProductWithVarsAndImages, Size } from "@/types";
-import Currency from "@/components/ui/currency";
 import { getSizeColors, getColorsFromVariations, getSizesFromVariations } from "@/lib/utils";
+import { useEffect, useState } from "react";
+
+import Currency from "@/components/ui/currency";
 import {
   Select,
   SelectContent,
@@ -11,17 +13,12 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import AddToCart from "@/app/product/[productId]/(components)/AddToCart";
-import { useEffect, useState } from "react";
-
-interface InfoProps {
-  product: ProductWithVarsAndImages;
-}
+import AddToCart from "@/components/ui/add-to-cart";
 
 type size = Size & { available?: boolean };
 type color = Color & { available?: boolean };
 
-const Info: React.FC<InfoProps> = ({ product }) => {
+const Info = ({ product }: { product: ProductWithVarsAndImages }) => {
   const sizes = getSizesFromVariations(product.productVariations);
   const [colors, setColors] = useState<color[]>(getColorsFromVariations(product.productVariations));
   const [size, setSize] = useState<size>(sizes[0]);
@@ -30,6 +27,7 @@ const Info: React.FC<InfoProps> = ({ product }) => {
   const handleSizeChange = (value: string) => {
     setSize(sizes.find((size) => size.id === value) || sizes[0]);
   };
+
   const handleColorChange = (value: string) => {
     setColor(colors.find((color) => color.id === value) || colors[0]);
   };

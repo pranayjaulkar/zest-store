@@ -3,25 +3,25 @@ import Container from "@/components/ui/container";
 import Billboards from "@/components/Billboards";
 import NoResults from "@/components/ui/no-results";
 import ProductCard from "@/components/ui/product-card";
-import Filter from "@/app/category/[categoryId]/components/Filter";
-import MobileFilter from "@/app/category/[categoryId]/components/MobileFilter";
+import Filter from "@/app/stores/[storeId]/categories/[categoryId]/components/Filter";
+import MobileFilter from "@/app/stores/[storeId]/categories/[categoryId]/components/MobileFilter";
 
 interface CategoryProps {
-  params: { categoryId: string };
+  params: { storeId: string; categoryId: string };
   searchParams: { colorId: string; sizeId: string };
 }
 export const revalidate = 0;
 
-const Category: React.FC<CategoryProps> = async ({ params, searchParams }) => {
-  const products = await getProducts({
+const Category = async ({ params, searchParams }: CategoryProps) => {
+  const products = await getProducts(params.storeId, {
     categoryId: params.categoryId,
     colorId: searchParams.colorId,
     sizeId: searchParams.sizeId,
   });
 
-  const sizes = await getSizes();
-  const colors = await getColors();
-  const category = await getCategory(params.categoryId);
+  const sizes = await getSizes(params.storeId);
+  const colors = await getColors(params.storeId);
+  const category = await getCategory(params.storeId, params.categoryId);
 
   return (
     <div className="bg-white">
