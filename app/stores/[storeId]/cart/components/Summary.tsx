@@ -40,7 +40,7 @@ const Summary = () => {
       window.location = response.data.url;
     } catch (error) {
       loadingBar.done();
-      console.trace("error: ", error);
+      // console.trace("error: ", error);
       toast.error("Something went wrong.");
     }
   };

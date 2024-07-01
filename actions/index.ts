@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Category, Store, Size, Color, Billboard, ProductWithVarsAndImages, Order } from "@/types";
+import { Category, Store, Size, Color, Billboard, ProductWithVarsAndImages, Order, Image, Product } from "@/types";
 
 interface Query {
   colorId?: string;
@@ -35,6 +35,10 @@ export const getProducts = async (storeId: string, query: Query): Promise<Produc
 
 export const getStore = async (storeId: string): Promise<Store> => {
   const res = await API.get(`/${storeId}`);
+  return res.data;
+};
+export const getStores = async (): Promise<(Store & { products: (Product & { images: Image[] })[] })[]> => {
+  const res = await API.get("/");
   return res.data;
 };
 

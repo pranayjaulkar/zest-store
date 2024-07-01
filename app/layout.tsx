@@ -1,9 +1,10 @@
-import Footer from "@/components/Footer";
 import { Urbanist } from "next/font/google";
 import ModalProvider from "@/providers/ModalProvider";
 import ToastProvider from "@/providers/ToastProvider";
-import "./globals.css";
 import LoadingBarProvider from "@/providers/LoadingBarProvider";
+import ErrorFallback from "@/components/ErrorFallback";
+import { ErrorBoundary } from "react-error-boundary";
+import "./globals.css";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -19,11 +20,12 @@ export default async function RootLayout({
   return (
     <html lang="en">
       <body className={urbanist.className}>
-        <ModalProvider />
-        <ToastProvider />
-        <LoadingBarProvider />
-        {children}
-        <Footer />
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+          <ModalProvider />
+          <ToastProvider />
+          <LoadingBarProvider />
+          {children}
+        </ErrorBoundary>
       </body>
     </html>
   );

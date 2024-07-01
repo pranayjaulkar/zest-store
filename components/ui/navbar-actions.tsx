@@ -22,7 +22,7 @@ const NavbarActions = () => {
     } catch (error) {
       loadingBar.done();
 
-      console.trace(error);
+      // console.trace(error);
 
       if (axios.isAxiosError(error))
         toast.error(
