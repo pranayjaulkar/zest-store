@@ -5,6 +5,7 @@ import LoadingBarProvider from "@/providers/LoadingBarProvider";
 import ErrorFallback from "@/components/ErrorFallback";
 import { ErrorBoundary } from "react-error-boundary";
 import "./globals.css";
+import { Suspense } from "react";
 
 const urbanist = Urbanist({ subsets: ["latin"] });
 
@@ -23,7 +24,9 @@ export default async function RootLayout({
         <ErrorBoundary FallbackComponent={ErrorFallback}>
           <ModalProvider />
           <ToastProvider />
-          <LoadingBarProvider />
+          <Suspense>
+            <LoadingBarProvider />
+          </Suspense>
           {children}
         </ErrorBoundary>
       </body>
