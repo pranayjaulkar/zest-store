@@ -1,6 +1,6 @@
 "use client";
 import { useLoadingBarStore } from "@/hooks/useLoadingBarStore";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
 import LoadingBar from "react-top-loading-bar";
 import { usePathname, useSearchParams } from "next/navigation";
 
@@ -17,14 +17,16 @@ const LoadingBarProvider: React.FC<LoadingBarProviderProps> = ({ color, height, 
   useEffect(() => {
     if (loadingBar.progress) loadingBar.done();
   }, [pathname, searchParams]);
-  
+
   return (
-    <LoadingBar
-      height={height || 2}
-      progress={loadingBar.progress}
-      onLoaderFinished={() => loadingBar.setProgress(0)}
-      {...props}
-    />
+    <Suspense>
+      <LoadingBar
+        height={height || 2}
+        progress={loadingBar.progress}
+        onLoaderFinished={() => loadingBar.setProgress(0)}
+        {...props}
+      />
+    </Suspense>
   );
 };
 export default LoadingBarProvider;
