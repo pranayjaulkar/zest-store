@@ -41,11 +41,9 @@ const Info = ({ product }: { product: ProductWithVarsAndImages }) => {
   return (
     <div>
       {/* Product Name */}
-
-      <h1 className="text-3xl font-bold text-gray-400">{product.name}</h1>
+      <h1 className="text-3xl font-bold text-black">{product.name}</h1>
 
       {/* Product Price */}
-
       <div className="mt-3 flex items-end justify-between">
         <p className="text-2xl text-gray-900">
           <Currency value={product.price} />
@@ -53,11 +51,9 @@ const Info = ({ product }: { product: ProductWithVarsAndImages }) => {
       </div>
 
       {/* Sizes And Colors */}
-
       <hr className="my-4" />
       <div className="flex flex-col gap-y-6">
         {/* Sizes */}
-
         <div className="flex items-center gap-x-4">
           <h3 className="font-semibold text-black min-w-12">Sizes:</h3>
           <Select defaultValue={size.id} onValueChange={handleSizeChange}>
@@ -78,7 +74,6 @@ const Info = ({ product }: { product: ProductWithVarsAndImages }) => {
         </div>
 
         {/* Colors */}
-
         <div className="flex items-center gap-x-4">
           <h3 className="font-semibold text-black min-w-12">Colors:</h3>
           <Select value={color.id} onValueChange={handleColorChange}>
@@ -106,7 +101,6 @@ const Info = ({ product }: { product: ProductWithVarsAndImages }) => {
       </div>
 
       {/* Add to Cart */}
-
       <AddToCart size={size} color={color} product={product} />
     </div>
   );

@@ -10,7 +10,13 @@ interface CategoryProps {
   params: { storeId: string; categoryId: string };
   searchParams: { colorId: string; sizeId: string };
 }
+
 export const revalidate = 0;
+
+export async function generateMetadata({ params }: { params: { storeId: string; categoryId: string } }) {
+  const category = await getCategory(params.storeId, params.categoryId);
+  return { title: category.name, description: "" };
+}
 
 const Category = async ({ params, searchParams }: CategoryProps) => {
   const products = await getProducts(params.storeId, {

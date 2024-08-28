@@ -9,7 +9,7 @@ const Navbar = async ({ store }: { store: Store }) => {
   return (
     <div className="border-b">
       <Container>
-        <div className="relative px-4 sm:px-6 lg:px-8 flex h-16 items-center">
+        <div className="relative px-4 py-4 sm:px-6 lg:px-8 flex items-center">
           <MainNav store={store} categories={categories} />
           <NavbarActions />
         </div>

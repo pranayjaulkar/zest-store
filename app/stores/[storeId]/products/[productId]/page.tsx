@@ -4,6 +4,11 @@ import Container from "@/components/ui/container";
 import Gallery from "@/components/gallery/Gallery";
 import Info from "@/components/ui/info";
 
+export async function generateMetadata({ params }: { params: { storeId: string; productId: string } }) {
+  const product = await getProduct(params.storeId, params.productId);
+  return { title: product.name, description: "" };
+}
+
 export default async function ProductPage({ params }: { params: { productId: string; storeId: string } }) {
   const product = await getProduct(params.storeId, params.productId);
 

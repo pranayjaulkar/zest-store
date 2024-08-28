@@ -32,7 +32,6 @@ const MainNavbar = ({ categories, store }: MainNavbarProps) => {
       }
     } catch (error) {
       loadingBar.done();
-
       // console.trace(error);
 
       if (axios.isAxiosError(error))
@@ -54,17 +53,17 @@ const MainNavbar = ({ categories, store }: MainNavbarProps) => {
         onClick={(event) => handleClick(event, { href: "/" })}
         className="ml-4 flex lg:ml-0 gap-x-2"
       >
-        <p className="font-semibold text-3xl">{store.name}</p>
+        <h1 className="font-semibold text-4xl">{store.name}</h1>
       </Link>
-      <nav className="ml-12 flex items-center space-x-4 lg:space-x-6">
+      <nav className="ml-20 flex items-center space-x-4 lg:space-x-6">
         {routes.map((route) => (
           <Link
             key={route.href}
             href={route.href}
             onClick={(event) => handleClick(event, route)}
             className={cn(
-              "text-md font-medium transition-colors hover:text-black",
-              route.active ? "text-black" : "text-neutral-500"
+              "text-lg font-semibold transition-colors hover:text-black",
+              route.active ? "text-black" : "text-neutral-600"
             )}
           >
             {route.label}
