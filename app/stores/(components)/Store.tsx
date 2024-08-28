@@ -25,7 +25,7 @@ export default function Store({ store }: { store: StoreType & { products: (Produ
       <div className="flex flex-col h-full space-y-2">
         <Image
           className="object-contain bg-gray-50 w-full h-4/5"
-          src={store.products[2].images[0].url}
+          src={store.products[0]?.images[0]?.url}
           width={200}
           height={200}
           alt={store.name}

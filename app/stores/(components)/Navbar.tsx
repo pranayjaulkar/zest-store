@@ -14,7 +14,7 @@ export default function Navbar() {
             </h2>
             <nav className="flex items-center text-sm md:text-xl font-semibold space-x-6 sm:space-x-8 md:space-x-10 lg:space-x-12">
               {/* Stores */}
-              <Link className="text-gray-400" href="/stores">
+              <Link className=" hover:text-gray-400 transition-all duration-300" href="/stores">
                 Stores
               </Link>
               {/* Dashboard */}

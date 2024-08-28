@@ -10,16 +10,24 @@ const Billboards = ({ billboards }: { billboards: BillboardType[] }) => {
   const containerRef = useRef<HTMLDivElement>(null);
 
   const handleLeft = () => {
-    setSlide((prev) => (prev > 0 ? prev - 1 : prev));
+    if (slide > 0) {
+      setSlide((prev) => prev - 1);
+    } else if (slide <= 0) {
+      setSlide(billboards.length - 1);
+    }
   };
 
   const handleRight = () => {
-    setSlide((prev) => (prev < billboards.length - 1 ? prev + 1 : prev));
+    if (slide < billboards.length - 1) {
+      setSlide((prev) => prev + 1);
+    } else if (slide >= billboards.length - 1) {
+      setSlide(0);
+    }
   };
 
   useEffect(() => {
     if (containerRef.current?.clientWidth && billboards.length > 1) {
-      animate(scope.current, { x: -slide * containerRef.current.clientWidth }, { ease: easeOut, duration: 0.3 });
+      animate(scope.current, { x: -slide * containerRef.current.clientWidth }, { ease: easeOut, duration: 0.6 });
     }
   }, [slide]);
 
@@ -28,13 +36,13 @@ const Billboards = ({ billboards }: { billboards: BillboardType[] }) => {
       <div ref={containerRef} className="rounded-xl relative aspect-square md:aspect-[2.4/1] overflow-hidden bg-cover">
         <div
           onClick={handleLeft}
-          className="absolute h-full z-10 hover:cursor-pointer px-2 flex items-center justify-center left-0"
+          className="absolute h-full hover:bg-[rgba(0,0,0,0.1)] transition-all duration-300 z-10 hover:cursor-pointer px-2 flex items-center justify-center left-0"
         >
           <ChevronLeft className="w-10 h-10" />
         </div>
         <div
           onClick={handleRight}
-          className="absolute h-full z-10 hover:cursor-pointer px-2 flex items-center justify-center right-0"
+          className="absolute h-full hover:bg-[rgba(0,0,0,0.1)] transition-all duration-300 z-10 hover:cursor-pointer px-2 flex items-center justify-center right-0"
         >
           <ChevronRight className="w-10 h-10" />
         </div>
@@ -44,9 +52,7 @@ const Billboards = ({ billboards }: { billboards: BillboardType[] }) => {
               key={i}
               style={{ backgroundImage: `url(${billboard?.imageUrl})` }}
               className="h-full min-w-full bg-cover flex flex-col justify-center items-center text-center gap-y-8"
-            >
-              <div className="font-bold text-3xl sm:text-5xl lg:text-6xl sm:max-w-xl max-w-xs">{billboard?.label}</div>
-            </div>
+            ></div>
           ))}
         </div>
       </div>

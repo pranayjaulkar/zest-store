@@ -33,9 +33,10 @@ export default async function HomePage() {
               </h1>
 
               <div className="w-full flex justify-center xl:justify-start items-center space-x-4">
-                {/* Get Started */}
-                <Button href={`${process.env.DASHBOARD_URL}`} />
-                {/* Explore Stores Button */}
+                {/* Create your store */}
+                <Button target="_blank" className="grow" href={`${process.env.DASHBOARD_URL}`} />
+
+                {/* Explore Stores */}
                 <Button href="/stores" variant="Explore" />
               </div>
             </div>
@@ -57,6 +58,7 @@ export default async function HomePage() {
                   />
                 </Link>
               </div>
+
               {/* Store Image */}
               <div className="w-full flex flex-col xl:block space-y-2 sm:space-y-4 md:space-y-8 xl:absolute xl:z-10 xl:left-[450px] xl:top-0  ">
                 <h3 className="xl:hidden text-2xl sm:text-4xl md:text-4xl font-bold text-white w-full text-center">
