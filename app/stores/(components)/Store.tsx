@@ -12,7 +12,6 @@ export default function Store({ store }: { store: StoreType & { products: (Produ
     try {
       loadingBar.start();
     } catch (error) {
-      // console.log("error: ", error);
       loadingBar.done();
     }
   };
